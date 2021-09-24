@@ -1,4 +1,6 @@
-﻿namespace BankOCR
+﻿using System;
+
+namespace BankOCR
 {
     // https://codingdojo.org/kata/BankOCR/
     
@@ -6,6 +8,7 @@
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hello");
         }
     }
 }
