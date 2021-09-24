@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\Documents\\Work\\BankOCR\\Bank OCR Reader\\Bank OCR Reader\\Bank OCR Reader.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\Documents\\Work\\BankOCR\\Bank OCR Reader\\Bank OCR Reader\\Bank OCR Reader.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\Documents\\Work\\BankOCR\\Bank OCR Reader\\Bank OCR Reader\\Bank OCR Reader.csproj",
+        "projectName": "Bank OCR Reader",
+        "projectPath": "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\Documents\\Work\\BankOCR\\Bank OCR Reader\\Bank OCR Reader\\Bank OCR Reader.csproj",
+        "packagesPath": "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\Documents\\Work\\BankOCR\\Bank OCR Reader\\Bank OCR Reader\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Mubin.DESKTOP-SBJA4DL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
