@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace Bank_OCR_Reader
+﻿namespace BankOCR
 {
+    // https://codingdojo.org/kata/BankOCR/
+    
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
