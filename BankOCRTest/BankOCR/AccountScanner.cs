@@ -21,7 +21,7 @@ namespace BankOCR
             { " _ |_| _|", "9" },
         };
 
-        public string Scanner(string accountString)
+        public string CaseOneScan(string accountString)
         {
             string[] lines = accountString.Split(Environment.NewLine);
             string accountNumber = "";
@@ -34,6 +34,19 @@ namespace BankOCR
                 accountNumber += numberCodes[charToDecipher];
             }
             return accountNumber;
+        }
+
+        public bool CaseTwoScan(string accountNumber)
+        {
+            char[] charArray = accountNumber.ToCharArray();
+            Array.Reverse(charArray);
+            string reverseAccountNumber = new string (charArray);
+            int checksumTotal = 0;
+            for(int i =0; i< 9; i++)
+            {
+                checksumTotal += (int.Parse(reverseAccountNumber.Substring(i, 1)) * (i+1));
+            }
+            return (checksumTotal % 11 == 0);
         }
     }
 }

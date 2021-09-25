@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BankOCR;
+using NUnit.Framework;
 
 namespace BankOcrKata
 {
@@ -13,6 +14,9 @@ namespace BankOcrKata
         [TestCase("012345678", false)]
         public void Tests(string accountNumber, bool isValid)
         {
+            var scanner = new AccountScanner();
+            var actual = scanner.CaseTwoScan(accountNumber);
+            Assert.AreEqual(isValid, actual);
         }
     }
 }

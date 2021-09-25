@@ -55,7 +55,7 @@ namespace BankOcrKata
         public void Tests(string input, string expectedResult)
         {
             var scanner = new AccountScanner();
-            var actual = scanner.Scanner(input);
+            var actual = scanner.CaseOneScan(input);
             Assert.AreEqual(expectedResult, actual);
         }
     }
