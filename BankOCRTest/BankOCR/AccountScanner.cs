@@ -5,9 +5,9 @@ namespace BankOCR
 {
     // https://codingdojo.org/kata/BankOCR/
     
-    public class Program
+    public class AccountScanner
     {
-        private static readonly Dictionary<string, string> numberCodes = new Dictionary<string, string>
+        private readonly Dictionary<string, string> numberCodes = new Dictionary<string, string>
         {
             { " _ | ||_|", "0" },
             { "     |  |", "1" },
@@ -21,13 +21,8 @@ namespace BankOCR
             { " _ |_| _|", "9" },
         };
 
-        public static void Main(string[] args)
+        public string Scanner(string accountString)
         {
-            string accountString = @"
-                           
-  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |";
-
             string[] lines = accountString.Split(Environment.NewLine);
             string accountNumber = "";
             for (int i = 0; i < 9; i++)
@@ -38,7 +33,7 @@ namespace BankOCR
                 charToDecipher += lines[3].Substring((i * 3), 3);
                 accountNumber += numberCodes[charToDecipher];
             }
-            Console.WriteLine(accountNumber);
+            return accountNumber;
         }
     }
 }

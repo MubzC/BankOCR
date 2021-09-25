@@ -54,7 +54,9 @@ namespace BankOcrKata
   ||_  _|  | _||_|  ||_| _|", "123456789")]
         public void Tests(string input, string expectedResult)
         {
-
+            var scanner = new AccountScanner();
+            var actual = scanner.Scanner(input);
+            Assert.AreEqual(expectedResult, actual);
         }
     }
 }
