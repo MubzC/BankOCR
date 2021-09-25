@@ -42,11 +42,49 @@ namespace BankOCR
             Array.Reverse(charArray);
             string reverseAccountNumber = new string (charArray);
             int checksumTotal = 0;
-            for(int i =0; i< 9; i++)
+            for(int i = 0; i< 9; i++)
             {
                 checksumTotal += (int.Parse(reverseAccountNumber.Substring(i, 1)) * (i+1));
             }
             return (checksumTotal % 11 == 0);
+        }
+
+        public string CaseThreeScan(string accountString)
+        {
+            string[] lines = accountString.Split(Environment.NewLine);
+            string accountNumber = "";
+            bool incorrectCharDetected = false;
+            for (int i = 0; i < 9; i++)
+            {
+                string charToDecipher = "";
+                charToDecipher += lines[1].Substring((i * 3), 3);
+                charToDecipher += lines[2].Substring((i * 3), 3);
+                charToDecipher += lines[3].Substring((i * 3), 3);
+                if (numberCodes.ContainsKey(charToDecipher))
+                {
+                    accountNumber += numberCodes[charToDecipher];
+                }
+                else
+                {
+                    incorrectCharDetected = true;
+                    accountNumber += "?";
+                }
+            }
+            if(incorrectCharDetected)
+            {
+                return accountNumber + " ILL";
+            }
+            else
+            {
+                if (CaseTwoScan(accountNumber))
+                {
+                    return accountNumber;
+                }
+                else
+                {
+                    return accountNumber + " ERR";
+                }
+            }
         }
     }
 }
