@@ -125,7 +125,8 @@ namespace BankOCR
                         actualAccountNumbers.Add(pAccountNumber);
                     }
                 }
-                if(actualAccountNumbers.Count > 1)
+                actualAccountNumbers.Sort();
+                if (actualAccountNumbers.Count > 1)
                 {
                     string listOfAccounts = "[";
                     foreach(string s in actualAccountNumbers)
@@ -148,7 +149,7 @@ namespace BankOCR
             else
             {
                 // We can't match the char. Return with question marks
-                return accountNumber;
+                return accountNumber + " ILL";
             }
         }
 
@@ -171,9 +172,6 @@ namespace BankOCR
             {
                 switch (accountNumber.Substring(i, 1))
                 {
-                    case "0":
-                        potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "8"));
-                        break;
                     case "1":
                         potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "7"));
                         break;
@@ -206,6 +204,9 @@ namespace BankOCR
                         potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "8"));
                         potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "3"));
                         potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "5"));
+                        break;
+                    case "0":
+                        potentialAccountNumbers.Add(accountNumber.Remove(i, 1).Insert(i, "8"));
                         break;
                     default:
                         break;
