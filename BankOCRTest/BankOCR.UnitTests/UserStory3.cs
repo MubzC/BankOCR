@@ -23,7 +23,7 @@ namespace BankOcrKata
 |_||_|  | _|  |  |  | _| _|", "664371495 ERR")]
         public void Tests(string input, string expectedResult)
         {
-            var scanner = new AccountScanner();
+            var scanner = new AccountScannerOld();
             var actual = scanner.CaseThreeScan(input);
             Assert.AreEqual(expectedResult, actual);
         }

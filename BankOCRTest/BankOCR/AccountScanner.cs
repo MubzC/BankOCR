@@ -21,70 +21,17 @@ namespace BankOCR
             { " _ |_| _|", "9" },
         };
 
-        public string CaseOneScan(string accountString)
-        {
-            string[] lines = accountString.Split(Environment.NewLine);
-            string accountNumber = "";
-            for (int i = 0; i < 9; i++)
-            {
-                string charToDecipher = "";
-                charToDecipher += lines[1].Substring((i * 3), 3);
-                charToDecipher += lines[2].Substring((i * 3), 3);
-                charToDecipher += lines[3].Substring((i * 3), 3);
-                accountNumber += numberCodes[charToDecipher];
-            }
-            return accountNumber;
-        }
-
         public bool ChecksumCheck(string accountNumber)
         {
             char[] charArray = accountNumber.ToCharArray();
             Array.Reverse(charArray);
-            string reverseAccountNumber = new string (charArray);
+            string reverseAccountNumber = new string(charArray);
             int checksumTotal = 0;
-            for(int i = 0; i< 9; i++)
-            {
-                checksumTotal += (int.Parse(reverseAccountNumber.Substring(i, 1)) * (i+1));
-            }
-            return (checksumTotal % 11 == 0);
-        }
-
-        public string CaseThreeScan(string accountString)
-        {
-            string[] lines = accountString.Split(Environment.NewLine);
-            string accountNumber = "";
-            bool incorrectCharDetected = false;
             for (int i = 0; i < 9; i++)
             {
-                string charToDecipher = "";
-                charToDecipher += lines[1].Substring((i * 3), 3);
-                charToDecipher += lines[2].Substring((i * 3), 3);
-                charToDecipher += lines[3].Substring((i * 3), 3);
-                if (numberCodes.ContainsKey(charToDecipher))
-                {
-                    accountNumber += numberCodes[charToDecipher];
-                }
-                else
-                {
-                    incorrectCharDetected = true;
-                    accountNumber += "?";
-                }
+                checksumTotal += (int.Parse(reverseAccountNumber.Substring(i, 1)) * (i + 1));
             }
-            if(incorrectCharDetected)
-            {
-                return accountNumber + " ILL";
-            }
-            else
-            {
-                if (ChecksumCheck(accountNumber))
-                {
-                    return accountNumber;
-                }
-                else
-                {
-                    return accountNumber + " ERR";
-                }
-            }
+            return (checksumTotal % 11 == 0);
         }
 
         public string CaseFourScan(string accountString)
@@ -108,49 +55,23 @@ namespace BankOCR
                 }
             }
 
-            if(!(accountNumber.Contains("?")))
+            if (!(accountNumber.Contains("?")))
             {
-                if(ChecksumCheck(accountNumber))
+                if (ChecksumCheck(accountNumber))
                 {
                     // No incorrect characters detected and we pass the checksum so we are good!
                     return accountNumber;
                 }
                 //We need to get the correct checksum possibilities by changing one char at a time. 
                 List<string> potentialAccountNumbers = GeneratePotentialAccounts(accountNumber);
-                List<string> actualAccountNumbers = new List<string>();
-                foreach(string pAccountNumber in potentialAccountNumbers)
-                {
-                    if(ChecksumCheck(pAccountNumber))
-                    {
-                        actualAccountNumbers.Add(pAccountNumber);
-                    }
-                }
-                if (actualAccountNumbers.Count > 1)
-                {
-                    string listOfAccounts = "[";
-                    foreach(string s in actualAccountNumbers)
-                    {
-                        listOfAccounts += "'" + s + "'" + ", ";
-                    }
-                    listOfAccounts = listOfAccounts.Remove(listOfAccounts.LastIndexOf(", "), 2);
-                    listOfAccounts += "]";
-                    return accountNumber + " AMB " + listOfAccounts;
-                }
-                else if (actualAccountNumbers.Count == 1)
-                {
-                    return actualAccountNumbers.ToArray()[0];
-                }
-                else
-                {
-                    return accountNumber + " ERR";
-                }
+                return DisplayAccountNumberStatus(potentialAccountNumbers, accountNumber);
             }
             else
             {
                 // We can't match the char. Return with question marks
                 return accountNumber + " ILL";
             }
-        }
+            }
 
         private List<string> GeneratePotentialAccounts(string accountNumber)
         {
@@ -247,6 +168,37 @@ namespace BankOCR
                 return "?";
             }
             return newChar;
+        }
+
+        public string DisplayAccountNumberStatus(List<string> potentialAccounts, string accountNumber)
+        {
+                List<string> actualAccountNumbers = new List<string>();
+                foreach (string pAccountNumber in potentialAccounts)
+                {
+                    if (ChecksumCheck(pAccountNumber))
+                    {
+                        actualAccountNumbers.Add(pAccountNumber);
+                    }
+                }
+                if (actualAccountNumbers.Count > 1)
+                {
+                    string listOfAccounts = "[";
+                    foreach (string s in actualAccountNumbers)
+                    {
+                        listOfAccounts += "'" + s + "'" + ", ";
+                    }
+                    listOfAccounts = listOfAccounts.Remove(listOfAccounts.LastIndexOf(", "), 2);
+                    listOfAccounts += "]";
+                    return accountNumber + " AMB " + listOfAccounts;
+                }
+                else if (actualAccountNumbers.Count == 1)
+                {
+                    return actualAccountNumbers.ToArray()[0];
+                }
+                else
+                {
+                    return accountNumber + " ERR";
+                }
         }
     }
 }

@@ -14,8 +14,8 @@ namespace BankOcrKata
         [TestCase("012345678", false)]
         public void Tests(string accountNumber, bool isValid)
         {
-            var scanner = new AccountScanner();
-            var actual = scanner.ChecksumCheck(accountNumber);
+            var scanner = new AccountScannerOld();
+            var actual = scanner.CaseTwoScan(accountNumber);
             Assert.AreEqual(isValid, actual);
         }
     }
