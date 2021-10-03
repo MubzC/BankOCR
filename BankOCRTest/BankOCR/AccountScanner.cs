@@ -125,7 +125,6 @@ namespace BankOCR
                         actualAccountNumbers.Add(pAccountNumber);
                     }
                 }
-                actualAccountNumbers.Sort();
                 if (actualAccountNumbers.Count > 1)
                 {
                     string listOfAccounts = "[";
@@ -212,7 +211,7 @@ namespace BankOCR
                         break;
                 }
             }
-
+            potentialAccountNumbers.Sort();
             return potentialAccountNumbers;
         }
 
